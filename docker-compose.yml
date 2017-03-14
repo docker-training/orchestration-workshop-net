@@ -1,0 +1,20 @@
+version: "2"
+
+services:
+  rng:
+    build: rng
+    ports:
+      - 8001:80
+
+  hasher:
+    build: hasher
+    ports:
+      - 8002:80
+
+#  redis:
+#    image: redis:3.2-nanoserver
+
+#  worker:
+    #build: worker
+    image: microsoft/nanoserver
+    
