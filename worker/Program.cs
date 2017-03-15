@@ -5,12 +5,15 @@ using ServiceStack.Redis;
 
 public class Program
 {
-    //private static IRedisClient redis;
+    private static HttpClient Client = new HttpClient();
+    private const string rng_uri = "http://rng";
+    private const string hasher_uri = "http://hasher";
+    private static IRedisClient redis;
 
     public static void Main(){
         Console.WriteLine("Worker starting...");
-        //var manager = new RedisManagerPool("redis:6379");
-        //redis = manager.GetClient();
+        var manager = new RedisManagerPool("redis:6379");
+        redis = manager.GetClient();
         while (true){
             try{
                 WorkLoop();
@@ -28,7 +31,7 @@ public class Program
         while (true){
             if (GetTimeInSeconds() > deadline){
                 Console.WriteLine("{0} unit of work done, updating hash counter", loopsDone);
-                //redis.IncrementValueBy("hahses", loopsDone);
+                redis.IncrementValueBy("hahses", loopsDone);
                 loopsDone = 0;
                 deadline =GetTimeInSeconds() + interval;
             }
@@ -52,15 +55,11 @@ public class Program
             return;
         }
         Console.WriteLine("Count found: {0}...", hexHash);
-        var created = true; // redis.SetEntryInHash("wallet", hexHash, Convert.ToBase64String(randomBytes));
+        var created = redis.SetEntryInHash("wallet", hexHash, Convert.ToBase64String(randomBytes));
         if(!created){
             Console.WriteLine("We already had that coin");
         }
     }
-
-    private static HttpClient Client = new HttpClient();
-    private const string rng_uri = "http://localhost:9000";     // "http://rng"
-    private const string hasher_uri = "http://localhost:9001";  // "http://hasher"
 
     private static byte[] GetRandomBytes(){
         var result = Client.GetAsync($"{rng_uri}/32").Result;

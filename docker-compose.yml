@@ -1,20 +1,30 @@
-version: "2"
+version: "2.1"
 
 services:
   rng:
     build: rng
     ports:
       - 8001:80
+    networks:
+      - nat
 
   hasher:
     build: hasher
     ports:
       - 8002:80
+    networks:
+      - nat
 
-#  redis:
-#    image: redis:3.2-nanoserver
+  redis:
+    image: redis:3.2-nanoserver
+    networks:
+      - nat
 
-#  worker:
-    #build: worker
-    image: microsoft/nanoserver
+  worker:
+    build: worker
+    networks:
+      - nat
     
+networks:
+  nat:
+    external: true
