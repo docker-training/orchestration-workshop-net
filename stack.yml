@@ -2,46 +2,35 @@ version: "3.1"
 
 services:
   rng:
-    build: rng
-    image: ${REGISTRY_SLASH-localhost:5000/}rng${COLON_TAG-:latest}
-    logging:
-      driver: gelf
-      options:
-        gelf-address: udp://localhost:12201
-    deploy:
-      mode: global
+    image: user/windows_rng:1.0
+    networks:
+    - dockerconins
+    ports:
+    - "8001:80"
 
   hasher:
-    build: hasher
-    image: ${REGISTRY_SLASH-localhost:5000/}hasher${COLON_TAG-:latest}
-    logging:
-      driver: gelf
-      options:
-        gelf-address: udp://localhost:12201
+    image: user/windows_hasher:1.0
+    networks:
+    - dockerconins
+    ports:
+    - "8002:80"
 
   webui:
-    build: webui
-    image: ${REGISTRY_SLASH-localhost:5000/}webui${COLON_TAG-:latest}
-    logging:
-      driver: gelf
-      options:
-        gelf-address: udp://localhost:12201
+    image: user/windows_webui:1.0
+    networks:
+    - dockerconins
     ports:
     - "8000:80"
 
   redis:
-    image: redis
-    logging:
-      driver: gelf
-      options:
-        gelf-address: udp://localhost:12201
+    image: redis:3.2-nanoserver
+    networks:
+    - dockerconins
 
   worker:
-    build: worker
-    image: ${REGISTRY_SLASH-localhost:5000/}worker${COLON_TAG-:latest}
-    logging:
-      driver: gelf
-      options:
-        gelf-address: udp://localhost:12201
-    deploy:
-      replicas: 10
+    image: user/windows_worker:1.0
+    networks:
+    - dockerconins
+
+networks:
+  dockerconins:
