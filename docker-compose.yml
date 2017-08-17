@@ -1,4 +1,4 @@
-version: "2.1"
+version: "3.1"
 
 services:
   rng:
@@ -24,7 +24,14 @@ services:
     build: worker
     networks:
       - nat
-    
+
+  webui:
+    build: webui
+    ports:
+      - "8000:80"
+    networks:
+      - nat
+
 networks:
   nat:
     external: true
