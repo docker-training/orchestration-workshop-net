@@ -31,7 +31,7 @@ public class Program
         while (true){
             if (GetTimeInSeconds() > deadline){
                 Console.WriteLine("{0} unit of work done, updating hash counter", loopsDone);
-                redis.IncrementValueBy("hahses", loopsDone);
+                redis.IncrementValueBy("hashes", loopsDone);
                 loopsDone = 0;
                 deadline =GetTimeInSeconds() + interval;
             }
