@@ -4,28 +4,28 @@ services:
   rng:
     image: user/windows_rng:1.0
     networks:
-    - dockerconins
+    - dockercoins
     ports:
     - "8001:80"
 
   hasher:
     image: user/windows_hasher:1.0
     networks:
-    - dockerconins
+    - dockercoins
     ports:
     - "8002:80"
 
   webui:
     image: user/windows_webui:1.0
     networks:
-    - dockerconins
+    - dockercoins
     ports:
     - "8000:80"
 
   redis:
     image: redis:3.2-nanoserver
     networks:
-    - dockerconins
+    - dockercoins
 
   worker:
     image: user/windows_worker:1.0
@@ -33,4 +33,4 @@ services:
     - dockerconins
 
 networks:
-  dockerconins:
+  dockercoins:
