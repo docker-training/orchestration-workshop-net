@@ -2,35 +2,35 @@ version: "3.1"
 
 services:
   rng:
-    build: rng
-    ports:
-      - 8001:80
+    image: user/windows_rng:1.0
     networks:
-      - nat
+    - nat
+    ports:
+    - "8001:80"
 
   hasher:
-    build: hasher
+    image: user/windows_hasher:1.0
+    networks:
+    - nat
     ports:
-      - 8002:80
-    networks:
-      - nat
-
-  redis:
-    image: redis:3.2-nanoserver
-    networks:
-      - nat
-
-  worker:
-    build: worker
-    networks:
-      - nat
+    - "8002:80"
 
   webui:
-    build: webui
-    ports:
-      - "8000:80"
+    image: user/windows_webui:1.0
     networks:
-      - nat
+    - nat
+    ports:
+    - "8000:80"
+
+  redis:
+    image: redis
+    networks:
+    - nat
+
+  worker:
+    image: user/windows_worker:1.0
+    networks:
+    - nat
 
 networks:
   nat:
