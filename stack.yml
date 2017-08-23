@@ -4,33 +4,41 @@ services:
   rng:
     image: user/windows_rng:1.0
     networks:
-    - dockercoins
-    ports:
-    - "8001:80"
-
+      - dockercoins
+    deploy:
+      endpoint_mode: dnsrr
+      
   hasher:
     image: user/windows_hasher:1.0
     networks:
-    - dockercoins
-    ports:
-    - "8002:80"
-
+      - dockercoins
+    deploy:
+      endpoint_mode: dnsrr
+      
   webui:
     image: user/windows_webui:1.0
     networks:
-    - dockercoins
+      - dockercoins
     ports:
-    - "8000:80"
-
+      - target: 80
+        published: 8000
+        mode: host
+    deploy:
+      endpoint_mode: dnsrr
+      
   redis:
     image: redis:3.2-nanoserver
     networks:
-    - dockercoins
-
+      - dockercoins
+    deploy:
+      endpoint_mode: dnsrr
+      
   worker:
     image: user/windows_worker:1.0
     networks:
-    - dockerconins
-
+      - dockercoins
+    deploy:
+      endpoint_mode: dnsrr
+      
 networks:
   dockercoins:
