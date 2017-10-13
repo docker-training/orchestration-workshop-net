@@ -2,21 +2,21 @@ version: "3.2"
 
 services:
   rng:
-    image: user/windows_rng:1.0
+    image: gnschenker/windows_rng:1.0
     networks:
       - dockercoins
     deploy:
       endpoint_mode: dnsrr
       
   hasher:
-    image: user/windows_hasher:1.0
+    image: gnschenker/windows_hasher:1.0
     networks:
       - dockercoins
     deploy:
       endpoint_mode: dnsrr
       
   webui:
-    image: user/windows_webui:1.0
+    image: gnschenker/windows_webui:1.0
     networks:
       - dockercoins
     ports:
@@ -34,7 +34,7 @@ services:
       endpoint_mode: dnsrr
       
   worker:
-    image: user/windows_worker:1.0
+    image: gnschenker/windows_worker:1.0
     networks:
       - dockercoins
     deploy:
