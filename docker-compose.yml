@@ -2,21 +2,21 @@ version: "3.1"
 
 services:
   rng:
-    image: user/windows_rng:1.0
+    image: user/dc_rng:1.0
     networks:
     - nat
     ports:
     - "8001:80"
 
   hasher:
-    image: user/windows_hasher:1.0
+    image: user/dc_hasher:1.0
     networks:
     - nat
     ports:
     - "8002:80"
 
   webui:
-    image: user/windows_webui:1.0
+    image: user/dc_webui:1.0
     networks:
     - nat
     ports:
@@ -28,7 +28,7 @@ services:
     - nat
 
   worker:
-    image: user/windows_worker:1.0
+    image: user/dc_worker:1.0
     networks:
     - nat
 
