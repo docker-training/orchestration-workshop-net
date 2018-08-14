@@ -1,4 +1,4 @@
-FROM stefanscherer/node-windows:8.3.0-nano
+FROM training/node-windows:ee2.0
 RUN npm install express
 RUN npm install redis
 COPY files/ /files/
