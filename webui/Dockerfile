@@ -1,4 +1,4 @@
-FROM training/node-windows:ee2.0
+FROM stefanscherer/node-windows:10.16.3-windowsservercore-2019
 RUN npm install express
 RUN npm install redis
 COPY files/ /files/

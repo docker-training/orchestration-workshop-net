@@ -1,5 +1,4 @@
-﻿FROM microsoft/dotnet:nanoserver
-RUN mkdir /app
+﻿FROM mcr.microsoft.com/dotnet/core/sdk:2.1
 WORKDIR /app
 COPY worker.csproj /app/
 RUN dotnet restore
