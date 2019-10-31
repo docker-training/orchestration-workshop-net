@@ -1,9 +1,8 @@
-FROM microsoft/dotnet:nanoserver
-RUN mkdir /app
+FROM mcr.microsoft.com/dotnet/core/sdk:2.1
 WORKDIR /app
 COPY rng.csproj /app/
 RUN dotnet restore
 COPY . /app
 ENV ASPNETCORE_URLS=http://+:80
 EXPOSE 80
-ENTRYPOINT ["dotnet", "run"]
+ENTRYPOINT ["dotnet", "run", "--no-launch-profile"]

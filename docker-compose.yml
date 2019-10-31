@@ -23,7 +23,7 @@ services:
     - "8000:80"
 
   redis:
-    image: redis:3.2-nanoserver
+    image: training/dc_redis:1.0
     networks:
     - nat
 
