@@ -2,43 +2,33 @@ version: "3.2"
 
 services:
   rng:
-    image: training/dc_rng:1.0
+    image: training/dc_rng:ws19
     networks:
       - dockercoins
-    deploy:
-      endpoint_mode: dnsrr
       
   hasher:
-    image: training/dc_hasher:1.0
+    image: training/dc_hasher:ws19
     networks:
       - dockercoins
-    deploy:
-      endpoint_mode: dnsrr
       
   webui:
-    image: training/dc_webui:1.0
+    image: training/dc_webui:ws19
     networks:
       - dockercoins
     ports:
       - target: 80
         published: 8000
         mode: host
-    deploy:
-      endpoint_mode: dnsrr
       
   redis:
-    image: redis:3.2-nanoserver
+    image: training/dc_redis:ws19
     networks:
       - dockercoins
-    deploy:
-      endpoint_mode: dnsrr
       
   worker:
-    image: training/dc_worker:1.0
+    image: training/dc_worker:ws19
     networks:
       - dockercoins
-    deploy:
-      endpoint_mode: dnsrr
       
 networks:
   dockercoins:
